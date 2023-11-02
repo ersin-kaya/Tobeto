@@ -1,25 +1,28 @@
 ﻿//7 - Write a C# program finds first 10 perfect numbers.
+using System.Numerics;
 
-var firstTenPerfectNumbers = GetFirstSevenPerfectNumbers(GetPrimeNumbersUpTo(100));
+var firstTenPerfectNumbers = GetFirstTenPerfectNumbers(GetPrimeNumbersUpTo(100));
 
-foreach (Int128 perfectNumber in firstTenPerfectNumbers)
+foreach (BigInteger perfectNumber in firstTenPerfectNumbers)
 {
-    Console.WriteLine(perfectNumber);
+    //Console.WriteLine(perfectNumber);
 }
 
-static List<Int128> GetFirstSevenPerfectNumbers(List<int> primeNumbers)
+static List<BigInteger> GetFirstTenPerfectNumbers(List<int> primeNumbers)
 {
-    List<Int128> perfectNumbers = new List<Int128>();
+    List<BigInteger> perfectNumbers = new List<BigInteger>();
     short perfectNumbersCount = (short)perfectNumbers.Count();
 
-    foreach (double primeNumber in primeNumbers)
+    foreach (int primeNumber in primeNumbers)
     {
         //n asal iken, (2^n)-1'de asal ise 2^(n-1)*((2^n)-1) => perfect number
-        if (!IsDividerMoreThanTwo(ComputeThePowerOfTwo((Int128)primeNumber) - 1))
+        if (!IsDividerMoreThanTwo(ComputeThePowerOfTwo(primeNumber) - 1))
         {
-            Int128 perfectNumber = ComputeThePowerOfTwo((Int128)primeNumber - 1) * (ComputeThePowerOfTwo((Int128)primeNumber) - 1);
+            BigInteger perfectNumber = ComputeThePowerOfTwo(primeNumber - 1) * (ComputeThePowerOfTwo(primeNumber) - 1);
             perfectNumbers.Add(perfectNumber);
-            if (++perfectNumbersCount == 7) //örn. ilk 8 sayıyı almak isterseniz bir süre beklettikten sonra sonuç dönecektir, veya doğrudan ekrana yazdırılırsa sadece 8. sayı geç yazdırılacaktır...
+            Console.WriteLine(perfectNumber);
+
+            if (++perfectNumbersCount == 10) //örn. ilk 8 sayıyı almak isterseniz bir süre beklettikten sonra sonuç dönecektir, veya doğrudan ekrana yazdırılırsa sadece 8. sayı geç yazdırılacaktır...
             {
                 break;
             }
@@ -43,10 +46,10 @@ static List<int> GetPrimeNumbersUpTo(int number)
 }
 
 //son 2 sayının üretilmesine engel olan, refactor edilmesi gereken metot
-static bool IsDividerMoreThanTwo(Int128 number)
+static bool IsDividerMoreThanTwo(BigInteger number)
 {
     int counter = 0;
-    for (Int128 i = 1; i <= number; i++) //not: döngüyü number/2'ye gidecek şekilde ele almak çözüm olmuyor
+    for (BigInteger i = 1; i <= number; i++) //not: döngüyü number/2'ye gidecek şekilde ele almak çözüm olmuyor
     {
         if (number % i == 0)
         {
@@ -60,7 +63,7 @@ static bool IsDividerMoreThanTwo(Int128 number)
     return (counter == 1) ? true : false;
 }
 
-static Int128 ComputeThePowerOfTwo(Int128 power)
+static BigInteger ComputeThePowerOfTwo(BigInteger power)
 {
-    return (Int128)Math.Pow(2, (double)power);
+    return (BigInteger)Math.Pow(2, (double)power); //refactor
 }

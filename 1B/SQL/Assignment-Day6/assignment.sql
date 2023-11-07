@@ -237,11 +237,10 @@ where e.employee_id = 3
 and o.order_date <= now()
 and o.order_date >= (select order_date
 					 from orders
-					 where date_part('month', order_date) = 5
+					 where date_part('month', order_date) = 1
 					 and employee_id = 3
-					 order by order_date asc
+					 order by date_part('year', order_date) desc, date_part('day', order_date) asc
 					 limit 1)
---group by e.employee_id
 
  ------------
  select sum(od.quantity * od.unit_price * (1 - od.discount)) as "Total Price"
@@ -253,12 +252,12 @@ and o.order_date >= (select order_date
  where e.employee_id = 3
  and o.order_date >= make_date(cast((select date_part('year', order_date)
 									 from orders
-									 where date_part('month', order_date) = 5
+									 where date_part('month', order_date) = 1
 									 and employee_id = 3
-									 order by order_date asc
-									 limit 1) as integer),
-					5,
-					1)
+									 order by order_date desc
+									 limit 1) as integer), --year
+					   			1, --month
+					   			1) --day
 					
  --tarihi koşulunu aşağıdaki şekilde kullanınca hatalı sonuç dönüyor
  --and date_part('day', o.order_date) >= 1

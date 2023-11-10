@@ -10,7 +10,7 @@ namespace Intro
         public string Name { get; set; }
 
         //ancak bunlar değil...
-        public List<Course> Categories { get; set; }
+        public List<Course> Courses { get; set; }
     }
 }
 

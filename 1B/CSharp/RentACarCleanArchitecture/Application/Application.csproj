@@ -13,6 +13,8 @@
     <None Remove="Features\Brands\Commands\Create\" />
     <None Remove="Features\Brands\Commands\Delete\" />
     <None Remove="Features\Brands\Commands\Update\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\" />
@@ -21,8 +23,18 @@
     <Folder Include="Features\Brands\Commands\Create\" />
     <Folder Include="Features\Brands\Commands\Delete\" />
     <Folder Include="Features\Brands\Commands\Update\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Tobeto.Core.Persistence">
+      <HintPath>..\..\Tobeto.Core.Packages\Tobeto.Core.Persistence\bin\Debug\net7.0\Tobeto.Core.Persistence.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>

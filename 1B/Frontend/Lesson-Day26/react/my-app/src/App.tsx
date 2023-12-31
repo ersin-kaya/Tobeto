@@ -11,6 +11,7 @@ function App(): ReactElement {
       <Routes>
         <Route path='/' element={<Homepage />}></Route>
         {/* <Route path='/product-detail' element={<ProductDetail />}></Route> */} {/* query string ile alırken */}
+        {/* // get multiple url parameters using useParams() hook: path='/product-detail/:id/:name' */}
         <Route path='/product-detail/:id' element={<ProductDetail />}></Route> {/* path variable ile alırken route değişiyor, hangi isimle almak istiyorsak öyle adlandırıyoruz. Ayrıca url'den verilen değeri sayfa içerisinde bu isimle(id) okuyabiliriz. Bunu useParams ile yapabiliriz. */}
       </Routes>
     </BrowserRouter>

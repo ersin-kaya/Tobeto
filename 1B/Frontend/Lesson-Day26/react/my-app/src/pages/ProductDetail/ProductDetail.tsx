@@ -25,6 +25,7 @@ const ProductDetail = (props: Props) => {
     // path variable 
     // // getbyid/1   // bununla veri almak için root'ta değişiklik yapmak gerekcek
     const params = useParams<{ id: string }>(); // burada id'nin nullable old. görüyoruz çünkü gönderilmeyebilir 
+    // get multiple url parameters using useParams() hook: const params = useParams<{ id: string, name: string }>();
     useEffect(() => {
         // console.log(params);
         if (params.id) { //eğer bu değişken/(in bir değeri) var ise

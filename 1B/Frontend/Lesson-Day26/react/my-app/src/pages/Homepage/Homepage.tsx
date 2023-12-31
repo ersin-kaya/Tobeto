@@ -35,6 +35,7 @@ const Homepage = (props: Props): ReactElement => { //ReactElement diye...
                 {products.map(product => (
                     <div key={product.id} className="col-3">
                         <ProductCard product={product} />
+                        {/* ProductCard'a zorunlu props tanımlamış olduk, bu komponent çağrılacaksa artık product vermek zorundayız. İçeride product'ın bilgilerini kullanacağımız için bu faydalı. */}
                     </div>
                 ))}
             </div>

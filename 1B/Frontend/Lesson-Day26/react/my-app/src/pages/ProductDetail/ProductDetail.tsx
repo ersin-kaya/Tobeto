@@ -27,7 +27,7 @@ const ProductDetail = (props: Props) => {
     const params = useParams<{ id: string }>(); // burada id'nin nullable old. görüyoruz çünkü gönderilmeyebilir 
     useEffect(() => {
         // console.log(params);
-        if (params.id) { //eğer bu değişken/in bir değeri var ise
+        if (params.id) { //eğer bu değişken/(in bir değeri) var ise
             // detay sayfasına istek at
             let service: ProductService = new ProductService();
             // service.getById(parseInt(params.id)).then(response => {

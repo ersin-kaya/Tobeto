@@ -15,6 +15,11 @@ const Homepage = (props: Props): ReactElement => { //ReactElement diye...
         fetchProducts();
     }, []);
 
+    // Bizi servis kullanımına götüren 3 neden..
+    // 1- Birden fazla noktada kullanılabilir
+    // 2- Sorumluluğun UI dosyası üzerinden kalkması için
+    // 3- Ortak bir noktadan yönetebilmek için
+
     const fetchProducts = () => {
         let service: ProductService = new ProductService();
         // Promise return ettiğimiz için biz buna then bloğuda yazabiliriz, async await'te
@@ -22,7 +27,6 @@ const Homepage = (props: Props): ReactElement => { //ReactElement diye...
             .then(response => {
                 setProducts(response.data.products)
             })
-
     }
 
     return (

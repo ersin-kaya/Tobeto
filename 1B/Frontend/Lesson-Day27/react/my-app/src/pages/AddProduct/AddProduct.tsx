@@ -14,7 +14,9 @@ const AddProduct = (props: Props) => {
         stock: 0,
     }
 
-
+    // Backend validasyonu güvenlik,
+    // Frontend validasyonu hem UX hem de performans için yapılır
+    // Örn. kullanıcının hatalı veri girişi yaptığında bunu backend'den yanıt geldiğinde öğrenecek, yani backend'e hatalı veriyle istek atmış olacak bir kere.. 
     const validationSchema = object({
         title: string()
             .required("Başlık alanı zorunludur.")
@@ -24,12 +26,20 @@ const AddProduct = (props: Props) => {
                 "my-custom-rule",
                 "En az 1 büyük, 1 küçük harf ve 1 rakam içermelidir.",
                 passwordValidator,
+                // (value, context) => {
+                //     console.log(value)
+                //     console.log(context)
+                //     console.log(context.from?.at(0)?.value) // ile oluşturduğumuz objenin değerlerine ulaşabiliyoruz (birbirine göre validate edilecek alanlar için kullanılabilir örn. bitiş tarihi başlangıç tarihine göre daha ileri bir tarih olacaksa..)
+
+                //     // son olarak return
+                //     return false // false dersen onaylamaz..
+                // }
             ),
         description: string().required().min(5).max(300),
         price: number().required().min(0),
         stock: number()
             .required()
-            .min(0)
+            .positive()
             .integer(),
     });
 
@@ -40,7 +50,8 @@ const AddProduct = (props: Props) => {
                 initialValues={initialValues}
                 onSubmit={(values) => { console.log(values) }}
                 validationSchema={validationSchema}
-            > {/* handler diyince aklımıza func. gelecek */}
+            >
+                {/* handler diyince aklımıza func. gelecek */}
 
                 <Form>
                     <FormikInput
@@ -49,10 +60,12 @@ const AddProduct = (props: Props) => {
                         placeholder="Ürün adı giriniz..."
                     />
                     <FormikInput name="description" label="Ürün Açıklaması" />
-                    <FormikInput name="price" label="Ürün Fiyatı" />
-                    <FormikInput name="stock" label="Ürün Stok" />
+                    <FormikInput name="price" label="Ürün Fiyatı"
+                        className="text-success" />
+                    <FormikInput name="stock" label="Ürün Stok"
+                        className="text-success" />
                     <button type="submit" className="btn btn-primary">
-                        Submit
+                        Kaydet
                     </button>
                 </Form>
             </Formik>

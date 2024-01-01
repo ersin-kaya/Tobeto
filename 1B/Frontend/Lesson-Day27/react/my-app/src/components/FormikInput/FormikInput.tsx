@@ -5,10 +5,11 @@ type Props = {
     label: string;
     name: string;
     // type opsiyonel olsun, 2 yol var
-    type?: string;
-    // type: string | undefined;
+    type?: string; // ilk syntax
+    // type: string | undefined;    // ikinci syntax !!(ilk syntax'ta type?'ın üzerine gelince " string | undefined " göreceksin) !!Ancak fazla doğrudan böyle yazarsak type'ı belirtmek gerekir bu yüzden pek sık kullanılmaz
 
     placeholder?: string;
+    className?: string;
 };
 
 const FormikInput = (props: Props) => {
@@ -18,11 +19,11 @@ const FormikInput = (props: Props) => {
             <Field
                 name={props.name}
                 type={props.type || "text"}
-                className="form-control"
                 placeholder={props.placeholder}
+                className={`form-control ${props.className}` || "form-control"}
             />
             <ErrorMessage name={props.name}>
-                {message => <span className="text-danger">{message}</span>}
+                {(message) => <span className="text-danger">{message}</span>}
             </ErrorMessage>
         </div>
     );

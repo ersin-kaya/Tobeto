@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Icon, Label, Menu, Table } from 'semantic-ui-react'
+import { Button, Icon, Menu, Table } from 'semantic-ui-react'
 import ProductService from '../services/productService'
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../store/actions/cartActions'
+import { toast } from 'react-toastify'
 
 export default function ProductList() {
+
+    const dispatch = useDispatch()
 
     const [products, setProducts] = useState([]) // react hook // lifecycle hook
 
@@ -14,6 +19,11 @@ export default function ProductList() {
         productService.getProducts().then(result => setProducts(result.data.data))
     }, [])
 
+    const handleAddToCart = (product, quantity) => {
+        dispatch(addToCart(product, quantity))
+        toast.success(`${product.productName} sepete eklendi!`)
+    }
+
     return (
         <Table celled>
             <Table.Header>
@@ -23,6 +33,7 @@ export default function ProductList() {
                     <Table.HeaderCell>ProductName</Table.HeaderCell>
                     <Table.HeaderCell>UnitsInStock</Table.HeaderCell>
                     <Table.HeaderCell>UnitPrice</Table.HeaderCell>
+                    <Table.HeaderCell></Table.HeaderCell>
                 </Table.Row>
             </Table.Header>
 
@@ -35,10 +46,12 @@ export default function ProductList() {
                             <Table.Cell><Link to={`/products/${product.productId}`}>{product.productName}</Link></Table.Cell>
                             <Table.Cell>{product.unitsInStock}</Table.Cell>
                             <Table.Cell>{product.unitPrice}</Table.Cell>
+                            <Table.Cell>
+                                <Button className='bg-success' onClick={() => handleAddToCart(product)}>Sepete Ekle</Button>
+                            </Table.Cell>
                         </Table.Row>
                     ))
                 }
-
             </Table.Body>
 
             <Table.Footer>

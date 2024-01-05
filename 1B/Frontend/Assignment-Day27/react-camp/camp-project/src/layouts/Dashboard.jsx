@@ -7,6 +7,7 @@ import ProductDetail from '../pages/ProductDetail'
 import CartDetail from '../pages/CartDetail'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
+import ProductAdd from '../pages/ProductAdd'
 
 export default function Dashboard() {
     return (
@@ -27,6 +28,7 @@ export default function Dashboard() {
                             {/* /1 yerine :id !! */}
                             <Route path='/products/:id' Component={ProductDetail}></Route>
                             <Route path='/cart' Component={CartDetail}></Route>
+                            <Route path='/product/add' Component={ProductAdd}></Route>
 
                             {/* <Route path='*'></Route> */}
                         </Routes>
